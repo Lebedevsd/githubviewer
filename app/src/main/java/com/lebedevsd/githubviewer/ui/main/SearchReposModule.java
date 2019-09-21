@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModel;
 import androidx.savedstate.SavedStateRegistryOwner;
 
+import com.lebedevsd.githubviewer.base.epoxy.ViewStateEpoxyController;
 import com.lebedevsd.githubviewer.di.ViewModelAssistedFactory;
 import com.lebedevsd.githubviewer.di.ViewModelKey;
 
@@ -30,4 +31,7 @@ public abstract class SearchReposModule {
     static Bundle provideDefaultArgs() {
         return null;
     }
+
+    @Binds
+    abstract ViewStateEpoxyController<SearchReposViewState> bindViewStateEpoxyController(SearchReposController controller);
 }

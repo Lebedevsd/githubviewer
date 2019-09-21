@@ -11,6 +11,7 @@ import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
+import com.lebedevsd.githubviewer.base.epoxy.ViewStateEpoxyController
 import com.lebedevsd.githubviewer.di.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import timber.log.Timber
@@ -23,6 +24,9 @@ abstract class BaseFragment<S, T : BaseViewModel<S>, B : ViewDataBinding> : Dagg
     protected val viewModel: T by lazy(LazyThreadSafetyMode.NONE) {
         ViewModelProviders.of(this, viewModelFactory).get(viewModelClass)
     }
+
+    @Inject
+    lateinit var controller: ViewStateEpoxyController<S>
 
     protected lateinit var binding: B
 
@@ -42,6 +46,7 @@ abstract class BaseFragment<S, T : BaseViewModel<S>, B : ViewDataBinding> : Dagg
                 dismissErrorIfShown()
             }
             Timber.d("Updating controller")
+            controller.setData(state)
         })
     }
 

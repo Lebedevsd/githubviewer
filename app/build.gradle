@@ -23,6 +23,7 @@ def navigationVersion = "2.1.0"
 def timberVersion = "4.7.1"
 def coreVersion = "1.0.1"
 def fragmentVersion = "1.1.0"
+def epoxyVersion = "3.8.0"
 
 def compileSDKVersion = 28
 def minSDKVersion = 21
@@ -69,6 +70,12 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$savedStateVersion"
+
+    // Epoxy
+    implementation "com.airbnb.android:epoxy:$epoxyVersion"
+    implementation "com.airbnb.android:epoxy-paging:$epoxyVersion"
+    implementation "com.airbnb.android:epoxy-databinding:$epoxyVersion"
+    kapt "com.airbnb.android:epoxy-processor:$epoxyVersion"
 
     // Logger
     implementation "com.jakewharton.timber:timber:$timberVersion"
