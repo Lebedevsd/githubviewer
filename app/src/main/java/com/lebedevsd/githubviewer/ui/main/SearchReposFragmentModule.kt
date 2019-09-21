@@ -5,9 +5,9 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class MainFragmentModule {
+abstract class SearchReposFragmentModule {
 
     @PerFragment
-    @ContributesAndroidInjector(modules = [MainModule::class])
-    abstract fun contributeMainFragmentInjector(): MainFragment
+    @ContributesAndroidInjector(modules = [SearchReposModule::class])
+    abstract fun contributeMainFragmentInjector(): SearchReposFragment
 }

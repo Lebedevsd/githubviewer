@@ -1,19 +1,9 @@
 package com.lebedevsd.githubviewer
 
-import android.os.Bundle
-import com.lebedevsd.githubviewer.ui.main.MainFragment
-import dagger.android.support.DaggerAppCompatActivity
+import com.lebedevsd.githubviewer.databinding.MainActivityBinding
+import com.lebedevsd.githubviewer.base.ui.BaseActivity
 
-class MainActivity : DaggerAppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
-                .commitNow()
-        }
-    }
-
+class MainActivity : BaseActivity<MainViewModel, MainActivityBinding>() {
+    override val viewModelClass: Class<MainViewModel> = MainViewModel::class.java
+    override val layoutId: Int = R.layout.main_activity
 }

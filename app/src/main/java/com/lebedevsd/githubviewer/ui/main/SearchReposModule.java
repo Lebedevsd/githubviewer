@@ -15,15 +15,15 @@ import dagger.Provides;
 import dagger.multibindings.IntoMap;
 
 @Module
-public abstract class MainModule {
+public abstract class SearchReposModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(MainViewModel.class)
-    abstract ViewModelAssistedFactory<? extends ViewModel> bindFactory(MainViewModel.Factory factory);
+    @ViewModelKey(SearchReposViewModel.class)
+    abstract ViewModelAssistedFactory<? extends ViewModel> bindFactory(SearchReposViewModel.Factory factory);
 
     @Binds
-    abstract SavedStateRegistryOwner bindSavedStateRegistryOwner(MainFragment commitDetailFragment);
+    abstract SavedStateRegistryOwner bindSavedStateRegistryOwner(SearchReposFragment searchReposFragment);
 
     @Nullable
     @Provides

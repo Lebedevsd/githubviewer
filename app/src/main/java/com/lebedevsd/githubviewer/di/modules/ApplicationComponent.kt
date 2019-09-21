@@ -1,6 +1,7 @@
 package com.lebedevsd.githubviewer.di.modules
 
 import com.lebedevsd.githubviewer.GithubViewerApplication
+import com.lebedevsd.githubviewer.di.ViewModelAssistedFactoriesModule
 import com.lebedevsd.githubviewer.di.modules.activities.MainActivityModule
 import dagger.Component
 import dagger.android.AndroidInjector

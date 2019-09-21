@@ -2,7 +2,7 @@ package com.lebedevsd.githubviewer.di.modules.activities
 
 import com.lebedevsd.githubviewer.MainActivity
 import com.lebedevsd.githubviewer.di.PerActivity
-import com.lebedevsd.githubviewer.ui.main.MainFragmentModule
+import com.lebedevsd.githubviewer.ui.main.SearchReposFragmentModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -13,6 +13,6 @@ abstract class MainActivityModule {
     @ContributesAndroidInjector(modules = [MainViewModule::class])
     internal abstract fun contributeMainActivity(): MainActivity
 
-    @Module(includes = [MainFragmentModule::class])
+    @Module(includes = [SearchReposFragmentModule::class])
     internal abstract class MainViewModule
 }
