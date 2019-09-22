@@ -1,31 +1,43 @@
-package com.lebedevsd.githubviewer.ui.main
+package com.lebedevsd.githubviewer.ui.searchrepos
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lebedevsd.githubviewer.R
 import com.lebedevsd.githubviewer.base.recyclerview.OnLoadMoreScrollListener
 import com.lebedevsd.githubviewer.base.ui.BaseFragment
-import com.lebedevsd.githubviewer.databinding.MainFragmentBinding
+import com.lebedevsd.githubviewer.databinding.SearchReposFragmentBinding
 import timber.log.Timber
 
-class SearchReposFragment : BaseFragment<SearchReposViewState, SearchReposViewModel, MainFragmentBinding>() {
+class SearchReposFragment :
+    BaseFragment<SearchReposViewState, SearchReposViewModel, SearchReposFragmentBinding>() {
     override val viewModelClass: Class<SearchReposViewModel> = SearchReposViewModel::class.java
-    override val layoutId: Int = R.layout.main_fragment
+    override val layoutId: Int = R.layout.search_repos_fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.d("onCreate()")
-//        viewModel.navigateToDetail.observe(this, Observer { sha ->
-//            Timber.d("Item with sha: %s was clicked", sha)
-//            findNavController().navigate(CommitListFragmentDirections.actionCommitListFragmentToCommitDetailFragment(sha))
-//        })
+        viewModel.navigateToRepo.observe(this, Observer { navigationData ->
+            Timber.d("Item with navigationData: %s was clicked", navigationData)
+            findNavController().navigate(
+                SearchReposFragmentDirections.actionSearchReposFragmentToRepoContributorsFragment(
+                    navigationData.repoName,
+                    navigationData.ownerName
+                )
+            )
+        })
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
 
         binding.recyclerview.apply {
@@ -36,7 +48,8 @@ class SearchReposFragment : BaseFragment<SearchReposViewState, SearchReposViewMo
                     DividerItemDecoration.VERTICAL
                 )
             )
-            addOnScrollListener(object : OnLoadMoreScrollListener(resources.getInteger(R.integer.load_threshold)) {
+            addOnScrollListener(object :
+                OnLoadMoreScrollListener(resources.getInteger(R.integer.load_threshold)) {
                 override fun onLoadMore() {
                     controller.currentData?.let {
                         viewModel.nextPage(it.content.page + 1)

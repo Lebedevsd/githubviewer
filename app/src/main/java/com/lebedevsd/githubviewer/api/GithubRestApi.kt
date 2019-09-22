@@ -1,6 +1,5 @@
 package com.lebedevsd.githubviewer.api
 
-import com.lebedevsd.githubviewer.api.model.Repo
 import com.lebedevsd.githubviewer.api.model.ReposResponse
 import com.lebedevsd.githubviewer.api.model.User
 import retrofit2.Call
@@ -20,22 +19,13 @@ interface GithubRestApi {
     fun searchRepos(@Query("q") request: String): Call<ReposResponse>
 
     /**
-     * Performs network call to get all collaborators of the Repo
+     * Performs network call to get all contributors of the Repo
      */
-    @GET("repos/{owner}/{repo}/collaborators")
-    fun getCollaborators(
+    @GET("repos/{owner}/{repo}/contributors")
+    fun getContributors(
         @Path("owner") owner: String,
         @Path("repo") repo: String
     ): Call<List<User>>
-
-    /**
-     * Performs network call to get user repositories
-     */
-    @GET("users/{owner}/repos")
-    fun getUserRepos(
-        @Path("owner") owner: String
-    ): Call<List<Repo>>
-
 
     companion object {
         /**

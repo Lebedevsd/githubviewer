@@ -7,17 +7,28 @@
 
     <fragment
         android:id="@+id/searchReposFragment"
-        android:name="com.lebedevsd.githubviewer.ui.main.SearchReposFragment"
-        android:label="search_repos_fragment"
-        tools:layout="@layout/main_fragment">
-        <!--        <action android:id="@+id/action_commitListFragment_to_commitDetailFragment"-->
-        <!--                app:destination="@id/commitDetailFragment" app:launchSingleTop="true"-->
-        <!--                app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"-->
-        <!--                app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>-->
+        android:name="com.lebedevsd.githubviewer.ui.searchrepos.SearchReposFragment"
+        android:label="@string/search_repos_title"
+        tools:layout="@layout/search_repos_fragment">
+        <action
+            android:id="@+id/action_searchReposFragment_to_repoContributorsFragment"
+            app:destination="@id/repoContributorsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
-    <!--    <fragment android:id="@+id/commitDetailFragment"-->
-    <!--              android:name="org.codepond.commitbrowser.home.commitdetail.CommitDetailFragment"-->
-    <!--              android:label="commit_detail_fragment" tools:layout="@layout/commit_detail_fragment">-->
-    <!--        <argument android:name="sha" app:argType="string"/>-->
-    <!--    </fragment>-->
+    <fragment
+        android:id="@+id/repoContributorsFragment"
+        android:name="com.lebedevsd.githubviewer.ui.repocontributors.RepoContributorsFragment"
+        android:label="@string/contributors_title"
+        tools:layout="@layout/repo_contributors_fragment">
+        <argument
+            android:name="repoName"
+            app:argType="string" />
+        <argument
+            android:name="ownerName"
+            app:argType="string" />
+    </fragment>
 </navigation>

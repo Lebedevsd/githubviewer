@@ -1,4 +1,4 @@
-package com.lebedevsd.githubviewer.ui.main;
+package com.lebedevsd.githubviewer.ui.repocontributors;
 
 import android.os.Bundle;
 
@@ -16,15 +16,15 @@ import dagger.Provides;
 import dagger.multibindings.IntoMap;
 
 @Module
-public abstract class SearchReposModule {
+public abstract class RepoContributorsModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(SearchReposViewModel.class)
-    abstract ViewModelAssistedFactory<? extends ViewModel> bindFactory(SearchReposViewModel.Factory factory);
+    @ViewModelKey(RepoContributorsViewModel.class)
+    abstract ViewModelAssistedFactory<? extends ViewModel> bindFactory(RepoContributorsViewModel.Factory factory);
 
     @Binds
-    abstract SavedStateRegistryOwner bindSavedStateRegistryOwner(SearchReposFragment searchReposFragment);
+    abstract SavedStateRegistryOwner bindSavedStateRegistryOwner(RepoContributorsFragment repoContributorsFragment);
 
     @Nullable
     @Provides
@@ -33,5 +33,5 @@ public abstract class SearchReposModule {
     }
 
     @Binds
-    abstract ViewStateEpoxyController<SearchReposViewState> bindViewStateEpoxyController(SearchReposController controller);
+    abstract ViewStateEpoxyController<RepoContributorsViewState> bindViewStateEpoxyController(RepoContributorsController controller);
 }

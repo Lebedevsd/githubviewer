@@ -12,7 +12,7 @@ class SearchReposRepository @Inject constructor(
     private val remoteApi: GithubApi
 ) {
     /**
-     * @Returns list of all locally hosted Recipes
+     * @Returns list of Repos for the particular [query]
      */
     fun searchRepos(query: String = ""): Flowable<List<Repo>> {
         return remoteApi.searchRepos(query)

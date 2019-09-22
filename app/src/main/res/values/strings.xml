@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">github viewer</string>
+    <string name="search_repos_title">Search Repos</string>
+    <string name="contributors_title">Repo Contributors</string>
 </resources>

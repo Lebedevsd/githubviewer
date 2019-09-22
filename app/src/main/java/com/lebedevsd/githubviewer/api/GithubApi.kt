@@ -1,17 +1,20 @@
 package com.lebedevsd.githubviewer.api
 
 import com.lebedevsd.githubviewer.api.model.ReposResponse
+import com.lebedevsd.githubviewer.api.model.User
 import com.squareup.moshi.Moshi
 import io.reactivex.Single
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Inject
+import javax.inject.Singleton
 
 
 /**
  * Provides recipes content from network API
  */
+@Singleton
 class GithubApi @Inject constructor(
     moshi: Moshi,
     okHttpClient: OkHttpClient
@@ -43,19 +46,19 @@ class GithubApi @Inject constructor(
     }
 
     /**
-     * Performs network call to get repo collaborators
+     * Performs network call to get repo contributors
      */
-    fun getCollaborators(
+    fun getContributors(
         userName: String, repoName: String
-    ) {
+    ): Single<List<User>> {
+        return Single.create { emitter ->
+            val response = service.getContributors(userName, repoName).execute()
 
-    }
-
-    /**
-     * Performs network call to get user repos
-     */
-    fun getUserRepos(
-        username: String
-    ) {
+            if (response.isSuccessful) {
+                response.body()?.let { emitter.onSuccess(it) }
+            } else {
+                emitter.onError(RuntimeException(response.message()))
+            }
+        }
     }
 }

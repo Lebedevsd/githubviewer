@@ -14,12 +14,11 @@ class SearchReposInteractor
     /**
      * @returns sortedBy [Repo.forks_count] list of Repos
      */
-    operator fun invoke(query: String) = getProducts(query)
+    operator fun invoke(query: String) = getRepos(query)
 
-    private fun getProducts(query: String): Flowable<List<Repo>> =
+    private fun getRepos(query: String): Flowable<List<Repo>> =
         repository.searchRepos(query)
             .map {
                 it.sortedBy { repo -> repo.forks_count }
             }
-
 }

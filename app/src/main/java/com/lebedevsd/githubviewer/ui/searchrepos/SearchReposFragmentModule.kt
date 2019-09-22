@@ -1,4 +1,4 @@
-package com.lebedevsd.githubviewer.ui.main
+package com.lebedevsd.githubviewer.ui.searchrepos
 
 import com.lebedevsd.githubviewer.di.PerFragment
 import dagger.Module
@@ -9,5 +9,5 @@ abstract class SearchReposFragmentModule {
 
     @PerFragment
     @ContributesAndroidInjector(modules = [SearchReposModule::class])
-    abstract fun contributeMainFragmentInjector(): SearchReposFragment
+    abstract fun contributeSearchReposFragmentInjector(): SearchReposFragment
 }

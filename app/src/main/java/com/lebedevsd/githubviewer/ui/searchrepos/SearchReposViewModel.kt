@@ -1,5 +1,7 @@
-package com.lebedevsd.githubviewer.ui.main
+package com.lebedevsd.githubviewer.ui.searchrepos
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.lebedevsd.githubviewer.api.model.Repo
 import com.lebedevsd.githubviewer.base.ui.BaseViewModel
@@ -23,6 +25,10 @@ class SearchReposViewModel @AssistedInject constructor(
     val searchRepos: SearchReposInteractor
 ) : BaseViewModel<SearchReposViewState>(handle) {
 
+    val navigateToRepo: LiveData<NavigationData>
+        get() = _navigateToRepo
+    private val _navigateToRepo = MutableLiveData<NavigationData>()
+
     private val subscription = CompositeDisposable()
 
     private val query = BehaviorProcessor.create<String>()
@@ -37,12 +43,12 @@ class SearchReposViewModel @AssistedInject constructor(
         initSub()
     }
 
-    fun nextPage(page: Int){
+    fun nextPage(page: Int) {
         handle[STATE_PAGE] = page
         this.page.onNext(page)
     }
 
-    fun search(query: String){
+    fun search(query: String) {
         handle[STATE_QUERY] = query
         handle[STATE_PAGE] = 0
         this.page.onNext(0)
@@ -84,7 +90,8 @@ class SearchReposViewModel @AssistedInject constructor(
                     notifyContentLoaded(
                         SearchReposViewState(
                             query = query.blockingFirst(),
-                            repos = it
+                            repos = it,
+                            onClick = _navigateToRepo::setValue
                         )
                     )
                 }, {

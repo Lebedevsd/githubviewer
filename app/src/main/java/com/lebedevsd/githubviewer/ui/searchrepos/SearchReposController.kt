@@ -1,4 +1,4 @@
-package com.lebedevsd.githubviewer.ui.main
+package com.lebedevsd.githubviewer.ui.searchrepos
 
 import com.lebedevsd.githubviewer.base.epoxy.ViewStateEpoxyController
 import com.lebedevsd.githubviewer.base.ui.LCE
@@ -14,7 +14,12 @@ class SearchReposController @Inject constructor() :
                 id(it.hashCode())
                 itemRepo(it)
                 clickListener { model, _, _, _ ->
-                    state.content.onClick?.invoke(model.itemRepo().hashCode())
+                    state.content.onClick?.invoke(
+                        NavigationData(
+                            model.itemRepo().ownerUsername,
+                            model.itemRepo().name
+                        )
+                    )
                 }
             }
         }
