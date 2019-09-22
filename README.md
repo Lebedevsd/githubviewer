@@ -13,13 +13,13 @@ To deploy release version of the application please run `adb install app/build/o
 It will use release_key, note *NEVER* put your own release keys under version control.
 
 Start screen:
-![Start screen](screenchots/start.png)
+![Start screen](https://github.com/Lebedevsd/githubviewer/tree/master/screenshots/start.png)
 
 Active Search:
-![Active Search](screenchots/search.png)
+![Active Search](https://github.com/Lebedevsd/githubviewer/tree/master/screenshots/search.png)
 
 Contributors screen:
-![Contributors screen](screenchots/contributors.png)
+![Contributors screen](https://github.com/Lebedevsd/githubviewer/tree/master/screenshots/contributors.png)
 
 ##Libraries in use:
 * ViewModel
