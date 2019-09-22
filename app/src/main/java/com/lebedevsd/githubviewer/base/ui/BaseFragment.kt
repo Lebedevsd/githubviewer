@@ -11,6 +11,7 @@ import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
+import com.lebedevsd.githubviewer.R
 import com.lebedevsd.githubviewer.base.epoxy.ViewStateEpoxyController
 import com.lebedevsd.githubviewer.di.ViewModelFactory
 import dagger.android.support.DaggerFragment
@@ -58,12 +59,12 @@ abstract class BaseFragment<S, T : BaseViewModel<S>, B : ViewDataBinding> : Dagg
     }
 
     private fun showError(error: Throwable) {
-//        errorSnackBar = Snackbar.make(binding.root, R.string.no_internet_connection, Snackbar.LENGTH_INDEFINITE).apply {
-//            show()
-//        }
+        errorSnackBar = Snackbar.make(binding.root, R.string.something_went_wrong, Snackbar.LENGTH_INDEFINITE).apply {
+            show()
+        }
     }
 
     private fun dismissErrorIfShown() {
-//        errorSnackBar?.dismiss()
+        errorSnackBar?.dismiss()
     }
 }
