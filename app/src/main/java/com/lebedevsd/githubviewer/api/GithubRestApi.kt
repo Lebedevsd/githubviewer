@@ -21,7 +21,7 @@ interface GithubRestApi {
     /**
      * Performs network call to get all contributors of the Repo
      */
-    @GET("reposState/{owner}/{repo}/contributors")
+    @GET("repos/{owner}/{repo}/contributors")
     fun getContributors(
         @Path("owner") owner: String,
         @Path("repo") repo: String

@@ -68,6 +68,17 @@ class SearchReposViewModel @AssistedInject constructor(
         handle[STATE_PAGE] = 1
         this.page.onNext(1)
         this.query.onNext(query)
+
+        val content = lce.value!!.content
+        notifyLoading(
+            content.copy(
+                itemSearch = content.itemSearch.copy(
+                    query = query
+                ),
+                page = 1,
+                reposState = ReposState()
+            )
+        )
         initSub()
     }
 
