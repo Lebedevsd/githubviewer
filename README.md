@@ -13,13 +13,13 @@ To deploy release version of the application please run `adb install app/build/o
 It will use release_key, note *NEVER* put your own release keys under version control.
 
 Start screen:
-![Start screen][screenchots/start.png]
+![Start screen](screenchots/start.png)
 
 Active Search:
-![Active Search][screenchots/search.png]
+![Active Search](screenchots/search.png)
 
 Contributors screen:
-![Contributors screen][screenchots/contributors.png]
+![Contributors screen](screenchots/contributors.png)
 
 ##Libraries in use:
 * ViewModel
