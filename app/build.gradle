@@ -142,6 +142,9 @@ dependencies {
     // testing libraries
     testImplementation "android.arch.persistence.room:testing:$roomVersion"
     testImplementation "io.mockk:mockk:$mockkVersion"
+    // https://mvnrepository.com/artifact/androidx.arch.core/core-testing
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
+
     testImplementation "org.assertj:assertj-core:$assertJVersion"
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
