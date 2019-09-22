@@ -1,10 +1,15 @@
 package com.lebedevsd.githubviewer.ui.searchrepos
 
 data class SearchReposViewState(
-    val query: String = "",
-    val page: Int = 0,
+    val page: Int = 1,
+    val reposState: ReposState = ReposState(),
+    val onClick: ((navigationData: NavigationData) -> Unit)? = null,
+    val itemSearch: ItemSearch = ItemSearch()
+)
+
+data class ReposState(
     val repos: List<ItemRepo> = emptyList(),
-    val onClick: ((navigationData: NavigationData) -> Unit)? = null
+    val hasNext: Boolean = false
 )
 
 data class ItemRepo(
@@ -14,6 +19,11 @@ data class ItemRepo(
     val ownerAvatar: String,
     val language: String,
     val forks_count: String
+)
+
+data class ItemSearch(
+    val query: String = "",
+    val onQueryTextListener: ((newQuery: String) -> Unit)? = null
 )
 
 data class NavigationData(

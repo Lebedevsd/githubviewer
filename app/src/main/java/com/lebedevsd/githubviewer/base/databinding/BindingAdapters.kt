@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.appcompat.widget.SearchView
 import androidx.core.text.PrecomputedTextCompat
 import androidx.core.widget.TextViewCompat
 import androidx.databinding.BindingAdapter
@@ -41,4 +42,14 @@ fun setLayoutHeight(view: View, matchParent: Boolean, layoutHeight: Float) {
 fun setTextAsync(textView: AppCompatTextView, text: String) {
     val params = TextViewCompat.getTextMetricsParams(textView)
     textView.setTextFuture(PrecomputedTextCompat.getTextFuture(text, params, null))
+}
+
+@BindingAdapter("query")
+fun setQuery(searchView: SearchView, queryText: String) {
+    searchView.setQuery(queryText, false)
+}
+
+@BindingAdapter("queryTextListener")
+fun setOnQueryTextListener(searchView: SearchView, listener: SearchView.OnQueryTextListener) {
+    searchView.setOnQueryTextListener(listener)
 }

@@ -10,7 +10,7 @@ data class Repo(
     val homepage: String,
     val html_url: String,
     val id: Int,
-    val language: String,
+    val language: String?,
     val master_branch: String,
     val name: String,
     val node_id: String,

@@ -33,9 +33,9 @@ class GithubApi @Inject constructor(
     /**
      * Performs network call to search for Repos
      */
-    fun searchRepos(request: String): Single<ReposResponse> {
+    fun searchRepos(request: String, page: Int): Single<ReposResponse> {
         return Single.create { emitter ->
-            val response = service.searchRepos(request).execute()
+            val response = service.searchRepos(request, page).execute()
 
             if (response.isSuccessful) {
                 response.body()?.let { emitter.onSuccess(it) }

@@ -13,15 +13,15 @@ import retrofit2.http.Query
 interface GithubRestApi {
 
     /**
-     * Performs network call to search for repos
+     * Performs network call to search for reposState
      */
     @GET("search/repositories")
-    fun searchRepos(@Query("q") request: String): Call<ReposResponse>
+    fun searchRepos(@Query("q") request: String, @Query("page") page: Int): Call<ReposResponse>
 
     /**
      * Performs network call to get all contributors of the Repo
      */
-    @GET("repos/{owner}/{repo}/contributors")
+    @GET("reposState/{owner}/{repo}/contributors")
     fun getContributors(
         @Path("owner") owner: String,
         @Path("repo") repo: String

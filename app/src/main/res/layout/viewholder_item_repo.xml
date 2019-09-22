@@ -41,30 +41,43 @@
             android:maxLines="1"
             android:text="@{itemRepo.full_name}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/avatar"
+            app:layout_constraintTop_toBottomOf="@+id/repo_name_title"
+            tools:text="test" />
+
+        <TextView
+            android:id="@+id/repo_name_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/repo_name_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/avatar"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Commit message" />
+            tools:text="@string/repo_name_title" />
+
+        <TextView
+            android:id="@+id/repo_forks_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/repo_forks_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/avatar"
+            app:layout_constraintTop_toBottomOf="@+id/repo_name"
+            tools:text="@string/repo_forks_title" />
 
         <TextView
             android:id="@+id/fork_count"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{itemRepo.forks_count}"
-            app:layout_constraintBottom_toTopOf="@+id/repo_owner"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/repo_name"
-            tools:text="Date and time" />
-
-        <TextView
-            android:id="@+id/repo_owner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@{itemRepo.ownerUsername}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="Author" />
+            app:layout_constraintStart_toEndOf="@+id/avatar"
+            app:layout_constraintTop_toBottomOf="@+id/repo_forks_title"
+            tools:text="1000" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

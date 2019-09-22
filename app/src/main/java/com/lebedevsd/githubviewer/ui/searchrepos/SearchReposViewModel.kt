@@ -36,23 +36,39 @@ class SearchReposViewModel @AssistedInject constructor(
 
     init {
         Timber.d("Initializing")
-        val query: String = "TEST"//? = handle[STATE_QUERY]
-        query?.let { this.query.onNext(it) }
-        page.onNext(handle[STATE_PAGE] ?: 0)
+        val page = handle[STATE_PAGE] ?: 1
+        this.page.onNext(page)
+
+        val query: String = handle[STATE_QUERY] ?: ""
+        if (query.isNotEmpty()) {
+            this.query.onNext(query)
+        }
+
+        notifyContentLoaded(
+            SearchReposViewState(
+                page = page,
+                onClick = _navigateToRepo::setValue,
+                itemSearch = ItemSearch(query, this::search)
+            )
+        )
 
         initSub()
     }
 
     fun nextPage(page: Int) {
-        handle[STATE_PAGE] = page
-        this.page.onNext(page)
+        if (lce.value!!.content.reposState.hasNext) {
+            handle[STATE_PAGE] = page
+            this.page.onNext(page)
+        }
     }
 
-    fun search(query: String) {
+    private fun search(query: String) {
+        subscription.clear()
         handle[STATE_QUERY] = query
-        handle[STATE_PAGE] = 0
-        this.page.onNext(0)
+        handle[STATE_PAGE] = 1
+        this.page.onNext(1)
         this.query.onNext(query)
+        initSub()
     }
 
     private fun initSub() {
@@ -62,41 +78,52 @@ class SearchReposViewModel @AssistedInject constructor(
                 page,
                 query,
                 BiFunction<Int, String, Pair<Int, String>> { page, query -> Pair(page, query) }
-            ).flatMap {
+            )
+                .observeOn(bgScheduler)
+                .flatMap { pair ->
+                val content = lce.value!!.content
                 notifyLoading(
-                    SearchReposViewState(
-                        it.second,
-                        it.first
+                    content.copy(
+                        itemSearch = content.itemSearch.copy(
+                            query = pair.second
+                        ),
+                        page = pair.first
                     )
                 )
-                searchRepos(it.second)
+                searchRepos(pair.second, pair.first)
             }
                 .map {
-                    it.map { repo: Repo ->
-                        ItemRepo(
-                            repo.full_name,
-                            repo.name,
-                            repo.owner.login,
-                            repo.owner.avatar_url,
-                            repo.language,
-                            repo.forks_count.toString()
-                        )
-                    }
+                    Pair(
+                        it.items.map { repo: Repo ->
+                            ItemRepo(
+                                repo.full_name,
+                                repo.name,
+                                repo.owner.login,
+                                repo.owner.avatar_url,
+                                repo.language ?: "",
+                                repo.forks_count.toString()
+                            )
+                        }, !it.incomplete_results
+                    )
                 }
                 .observeOn(uiScheduler)
                 .subscribeOn(bgScheduler)
                 .subscribe({
                     Timber.d(it.toString())
+                    val content = lce.value!!.content
+                    val mergedRepos = content.reposState.repos.toMutableList()
+                    mergedRepos.addAll(it.first)
                     notifyContentLoaded(
-                        SearchReposViewState(
-                            query = query.blockingFirst(),
-                            repos = it,
-                            onClick = _navigateToRepo::setValue
+                        content.copy(
+                            reposState = content.reposState.copy(
+                                repos = mergedRepos,
+                                hasNext = it.second
+                            )
                         )
                     )
                 }, {
                     Timber.e(it.toString())
-                    notifyError(it, SearchReposViewState())
+                    notifyError(it, lce.value!!.content)
                 })
         )
     }

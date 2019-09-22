@@ -2,4 +2,7 @@
     <string name="app_name">github viewer</string>
     <string name="search_repos_title">Search Repos</string>
     <string name="contributors_title">Repo Contributors</string>
+    <string name="repo_name_title">Repo name:</string>
+    <string name="repo_forks_title">Fork amount:</string>
+    <string name="hint_search_repos">repositories</string>
 </resources>

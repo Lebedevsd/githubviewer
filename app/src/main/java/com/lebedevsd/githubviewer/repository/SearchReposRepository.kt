@@ -1,7 +1,7 @@
 package com.lebedevsd.githubviewer.repository
 
 import com.lebedevsd.githubviewer.api.GithubApi
-import com.lebedevsd.githubviewer.api.model.Repo
+import com.lebedevsd.githubviewer.api.model.ReposResponse
 import io.reactivex.Flowable
 import javax.inject.Inject
 
@@ -14,11 +14,8 @@ class SearchReposRepository @Inject constructor(
     /**
      * @Returns list of Repos for the particular [query]
      */
-    fun searchRepos(query: String = ""): Flowable<List<Repo>> {
-        return remoteApi.searchRepos(query)
+    fun searchRepos(query: String = "", page: Int = 1): Flowable<ReposResponse> {
+        return remoteApi.searchRepos(query, page)
             .toFlowable()
-            .map {
-                it.items
-            }
     }
 }
