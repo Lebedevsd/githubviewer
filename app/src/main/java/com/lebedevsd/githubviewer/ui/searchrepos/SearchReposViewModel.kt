@@ -1,9 +1,9 @@
 package com.lebedevsd.githubviewer.ui.searchrepos
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.lebedevsd.githubviewer.api.model.Repo
+import com.lebedevsd.githubviewer.base.livedata.SingleLiveEvent
 import com.lebedevsd.githubviewer.base.ui.BaseViewModel
 import com.lebedevsd.githubviewer.di.ViewModelAssistedFactory
 import com.lebedevsd.githubviewer.di.scheduler.BackgroundTaskScheduler
@@ -27,7 +27,7 @@ class SearchReposViewModel @AssistedInject constructor(
 
     val navigateToRepo: LiveData<NavigationData>
         get() = _navigateToRepo
-    private val _navigateToRepo = MutableLiveData<NavigationData>()
+    private val _navigateToRepo = SingleLiveEvent<NavigationData>()
 
     private val subscription = CompositeDisposable()
 
